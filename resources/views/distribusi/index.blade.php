@@ -1,4 +1,4 @@
-@extends('layouts.StaffDashboardLayout')
+@extends('layouts.distribusi.Layoutindex')
 @section('content')
     {{-- ==================================CONTENT MAIN ========================================= --}}
     <!-- Content Header (Page header) -->

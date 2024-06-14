@@ -8,8 +8,19 @@
             <div class="card-body">
                 <p class="login-box-msg">Register a new membership</p>
 
-                <form method="POST" action="#" autocomplete="on">
+                <form method="post" action="{{ route('register') }}" autocomplete="on">
                     @csrf
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <div class="input-group mb-3">
+                            <input type="nama" class="form-control" id="nama" name="nama" placeholder="nama">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <div class="input-group mb-3">
@@ -57,7 +68,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </div>
