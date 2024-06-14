@@ -9,17 +9,18 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::prefix('customer')->group(function () {
-    // Route::get('menu', [])
+Route::prefix('register')->group(function () {
+    Route::get('/', [RegisterControllerCustomer::class, 'showRegistrationForm'])->name('register');
+    Route::post('/', [RegisterControllerCustomer::class, 'register']);
 });
 
 Route::get('login', [LoginControllerCustomer::class, 'index'])->name('login');
-Route::get('register', [RegisterControllerCustomer::class, 'index'])->name('register');
+
 
 Route::prefix('staf-distribusi')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::prefix('staf-penjualan')->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index2'])->name('dashboard');
 });
