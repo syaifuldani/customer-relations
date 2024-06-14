@@ -1,0 +1,40 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.register-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.register-form .input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form label {
+    margin-bottom: 4px;
+}
+
+.register-form input,
+.register-form select {
+    width: 100%;
+}
+
+.register-form .col-4 {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Media query untuk memastikan form responsif */
+@media (max-width: 768px) {
+    .register-form {
+        grid-template-columns: 1fr;
+    }
+}
