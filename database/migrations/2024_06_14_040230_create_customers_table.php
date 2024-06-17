@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('login_id')->references('id')->on('login')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_customer');
             $table->string('email')->unique();
-            $table->string('no_hp');
+            $table->string('no_hp')->default('08xxxxxxxx');
             $table->timestamps();
         });
     }
