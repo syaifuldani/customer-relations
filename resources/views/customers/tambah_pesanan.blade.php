@@ -11,7 +11,7 @@
 
 <body>
     <!-- NAVBAR -->
-    @include('navbar')
+    @include('layouts.navbarpesan')
     <div class="container">
         <!-- Konten -->
         <div id="home-content" class="home-content">

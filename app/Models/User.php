@@ -42,7 +42,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function user()
+    public function customer()
     {
         return $this->hasOne(Customers::class, 'login_id');
     }

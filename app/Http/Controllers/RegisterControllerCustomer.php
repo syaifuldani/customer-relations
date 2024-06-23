@@ -2,31 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Customers;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterControllerCustomer extends Controller
 {
-    public function showRegistrationForm()
+    public function create()
     {
         return view('register.customer.index', [
-            'title' => "Register"
+            'title' => 'Register',
         ]);
     }
 
-    public function register(Request $request)
+    public function store(Request $request)
     {
-        $request->validate(
-            [
-                'nama' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:login,email',
-                'username' => 'required|string|max:255|unique:login,username',
-                'password' => 'required|string|min:8|confirmed',
-                'password_confirmation' => 'required|string|min:8|same:password',
-            ]
-        );
+        $request->validate([
+            'username' => 'required|string|max:255|unique:login,username',
+            'password' => 'required|string|min:8',
+            'konfirmasi-password' => 'required|same:password',
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:customers,email',
+        ]);
 
         $login = User::create([
             'username' => $request->username,
@@ -36,10 +34,11 @@ class RegisterControllerCustomer extends Controller
         ]);
 
         Customers::create([
+            'login_id' => $login->id,
             'nama_customer' => $request->nama,
             'email' => $request->email,
         ]);
 
-        return redirect(route('login'))->with('success', 'User registered successfully.');
+        return redirect()->route('logincustomer')->with('success', 'Registration successful!');
     }
 }
