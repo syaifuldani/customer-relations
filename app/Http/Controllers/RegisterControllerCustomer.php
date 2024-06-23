@@ -39,6 +39,6 @@ class RegisterControllerCustomer extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect()->route('login')->with('success', 'Registration successful!');
+        return redirect()->route('logincustomer')->with('success', 'Registration successful!');
     }
 }
