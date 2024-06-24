@@ -40,7 +40,8 @@ Route::get('tambah_pesanan', [TambahPesananController::class, 'indexTambahPesana
 
 // =================================================================
 Route::prefix('staff')->group(function () {
-    Route::get('login', [LoginStaffController::class, 'index'])->name('loginstaff');
+    Route::get('/login', [LoginStaffController::class, 'index'])->name('loginstaff');
+    Route::post('/auth', [LoginStaffController::class, 'authentication'])->name('loginstaff.authentication');
 });
 
 Route::prefix('daftarstaff')->group(function () {
@@ -52,6 +53,7 @@ Route::prefix('daftarstaff')->group(function () {
 Route::prefix('staf-distribusi')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('tambah_barang', [TambahBarangController::class, 'index'])->name('tambah_barang');
+    Route::post('/', [TambahBarangController::class, 'store'])->name('tambah_barang.store');
 });
 
 Route::prefix('staf-penjualan')->group(function () {

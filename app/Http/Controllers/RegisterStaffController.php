@@ -40,6 +40,7 @@ class RegisterStaffController extends Controller
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat
         ]);
-        return redirect()->route('daftarstaff')->with('success', 'Registration successful!');
+
+        return redirect()->route('logincustomer')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 }

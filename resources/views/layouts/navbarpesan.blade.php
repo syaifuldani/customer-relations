@@ -40,6 +40,11 @@
                     <span class="quantity">0</span>
                 </div>
             </li>
+            <li class="nav-item mr-2">
+                <div class="tagnama" id="tagnama">
+                    <span>{{ $nama }}</span>
+                </div>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}">Logout</a>
