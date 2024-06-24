@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Order Distribusi</h1>
+                    <h1 class="m-0">List Barang</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -31,80 +31,43 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID PERMINTAAN</th>
-                                    <th>Nama Perusahaan</th>
-                                    <th>Status Order</th>
-                                    <th>Tanggal Permintaan</th>
-                                    <th>Jangka Pembayaran</th>
-                                    <th>Jenis Pajak</th>
+                                    <th>ID Barang</th>
+                                    <th>Foto Barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>Kategori Barang</th>
+                                    <th>Stok Barang</th>
+                                    <th>Harga Barang</th>
                                     <th style="width: 100px;">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        bening
-                                    </td>
-                                    <td>
-                                        Kaca
-                                    </td>
-                                    <td>
-                                        25cm
-                                    </td>
-                                    <td>
-                                        100gram
-                                    </td>
-                                    <td>
-                                        10
-                                    </td>
-                                    <td>
-                                        <button type="submit" data-toggle="modal" data-target="#modal-edited"
-                                            name="t_edit" class="btn btn-success btn-sm">Edit</button>
-                                        <button type="submit" data-toggle="modal" data-target="#modal-delete"
-                                            name="t_delete" id="t_delete" class="btn btn-danger btn-sm">Hapus</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        bening
-                                    </td>
-                                    <td>
-                                        Kaca
-                                    </td>
-                                    <td>
-                                        100cm
-                                    </td>
-                                    <td>
-                                        100gram
-                                    </td>
-                                    <td>
-                                        10
-                                    </td>
-                                    <td>
-                                        <button type="submit" data-toggle="modal" data-target="#modal-edited"
-                                            name="t_edit" class="btn btn-success btn-sm">Edit</button>
-                                        <button type="submit" data-toggle="modal" data-target="#modal-delete"
-                                            name="t_delete" id="t_delete" class="btn btn-danger btn-sm">Hapus</button>
-                                    </td>
-                                </tr>
+                                @forelse ($products as $product)
+                                    <tr>
+                                        <td>{{ $product->id_barang }}</td>
+                                        <td class="text-center">
+                                            <img src="{{ asset('/storage/products/' . $product->foto_barang) }}"
+                                                class="rounded" style="width: 150px">
+                                        </td>
+                                        <td>{{ $product->nama_barang }}</td>
+                                        <td>{{ $product->kategori_barang }}</td>
+                                        <td>{{ $product->stok_barang }}</td>
+                                        <td>{{ 'Rp ' . number_format($product->harga_barang, 2, ',', '.') }}</td>
+                                        <td class="text-center">
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action=""
+                                                method="POST">
+                                                <a href="" class="btn btn-sm btn-primary">EDIT</a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <div class="alert alert-danger">
+                                        Data Products belum Tersedia.
+                                    </div>
+                                @endforelse
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID PERMINTAAN</th>
-                                    <th>Nama Perusahaan</th>
-                                    <th>Status Order</th>
-                                    <th>Tanggal Permintaan</th>
-                                    <th>Jangka Pembayaran</th>
-                                    <th>Jenis Pajak</th>
-                                    <th style="width: 100px;">AKSI</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->

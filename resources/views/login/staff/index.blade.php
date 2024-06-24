@@ -8,8 +8,17 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
+                @if ($errors->any())
+                    <div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                <form action="" method="post">
+                <form action="{{ route('loginstaff.authentication') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Username" name="username" id="username">
