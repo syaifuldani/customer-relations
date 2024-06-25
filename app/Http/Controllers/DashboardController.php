@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $staffId = session('userData')->staff->staff_id;
 
         // Mengambil data barang
-        $products = Barangs::latest()->paginate(10);
+        $products = Barangs::all();
 
         // Mengirim data ke view
         return view('distribusi.index', [

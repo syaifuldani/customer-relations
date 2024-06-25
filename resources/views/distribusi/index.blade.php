@@ -46,7 +46,7 @@
                                         <td>{{ $product->id_barang }}</td>
                                         <td class="text-center">
                                             <img src="{{ asset('/storage/products/' . $product->foto_barang) }}"
-                                                class="rounded" style="width: 150px">
+                                                class="rounded" style="width: 150px" height="93.48px">
                                         </td>
                                         <td>{{ $product->nama_barang }}</td>
                                         <td>{{ $product->kategori_barang }}</td>

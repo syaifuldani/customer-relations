@@ -26,19 +26,19 @@ Route::prefix('login')->group(function () {
     Route::post('/auth', [LoginControllerCustomer::class, 'authentication'])->name('login.authentication');
 });
 
-// ====================================================================================
+// =======================HOME USER SETELAH LOGIN====================================================
 
 Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeControllerCustomer::class, 'index'])->name('home');
 });
 
 
-Route::get('tambah_pesanan', [TambahPesananController::class, 'indexTambahPesanan'])->name('pesan');
+// Route::get('tambah_pesanan', [TambahPesananController::class, 'indexTambahPesanan'])->name('pesan');
 
 
 
 
-// =================================================================
+// ============================STAFF=====================================
 Route::prefix('staff')->group(function () {
     Route::get('/login', [LoginStaffController::class, 'index'])->name('loginstaff');
     Route::post('/auth', [LoginStaffController::class, 'authentication'])->name('loginstaff.authentication');
