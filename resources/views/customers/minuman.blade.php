@@ -2,105 +2,56 @@
     <h1>MINUMAN</h1>
     <div class="col-12">
         <div class="row row-cols-2 row-cols-sm-2 row-cols-md-5 row-cols-2 g-1">
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167075007863959f7e3e63a.jpg" class="card-img-top"
-                        alt="MINUMAN 0">
-                    <div>
-                        <h5 class="card-title">ES TEKLEK</h5>
-                        <p class="card-text">Rp. 6,500</p>
-                        <button class="btn-add">ADD</button>
+            @foreach ($barangs as $barang)
+                <div class="col mb-4">
+                    <div class="card">
+                        <img src="{{ asset('/storage/products/' . $barang->foto_barang) }}" class="rounded"
+                            style="width: 180px" height="150px">
+                        <div>
+                            <h5 class="card-title">{{ $barang->nama_barang }}</h5>
+                            <p class="card-text">{{ 'Rp ' . number_format($barang->harga_barang, 2, ',', '.') }}</p>
+                            @if (session('userData'))
+                                <button class="btn-add">Add</button>
+                            @else
+                                <button class="btn-add" id="btn-pesan">Pesan</button>
+                            @endif
+                        </div>
                     </div>
                 </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<!-- Modal HTML -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login Diperlukan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167075009763959f9187785.jpg" class="card-img-top"
-                        alt="MINUMAN 1">
-                    <div>
-                        <h5 class="card-title">ES SLUKU BATOK</h5>
-                        <p class="card-text">Rp. 6,500</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
+            <div class="modal-body">
+                Silahkan login terlebih dahulu untuk melakukan pemesanan
             </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167075005563959f676abfe.jpg" class="card-img-top"
-                        alt="MINUMAN 2">
-                    <div>
-                        <h5 class="card-title">ES PETAK UMPET</h5>
-                        <p class="card-text">Rp. 10,000</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167075003563959f536af84.jpg" class="card-img-top"
-                        alt="MINUMAN 3">
-                    <div>
-                        <h5 class="card-title">ES GOBAK SODOR</h5>
-                        <p class="card-text">Rp. 10,000</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167075000463959f348e723.jpg" class="card-img-top"
-                        alt="MINUMAN 4">
-                    <div>
-                        <h5 class="card-title">ES COKLAT</h5>
-                        <p class="card-text">Rp. 9,000</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167074997763959f192fdb8.jpg" class="card-img-top"
-                        alt="MINUMAN 5">
-                    <div>
-                        <h5 class="card-title">THAI TEA ORI</h5>
-                        <p class="card-text">Rp. 9,000</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167074995263959f00bcdab.jpg" class="card-img-top"
-                        alt="MINUMAN 6">
-                    <div>
-                        <h5 class="card-title">GREEN TAHI THEA</h5>
-                        <p class="card-text">Rp. 9,000</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167074982163959e7d5f676.jpg" class="card-img-top"
-                        alt="MINUMAN 7">
-                    <div>
-                        <h5 class="card-title">AIR MINERAL</h5>
-                        <p class="card-text">Rp. 4,500</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="https://www.vmenu.id/storage/menu/167074956763959d7f35c05.jpg" class="card-img-top"
-                        alt="MINUMAN 8">
-                    <div>
-                        <h5 class="card-title">ES TEH</h5>
-                        <p class="card-text">Rp. 4,500</p>
-                        <button class="btn-add">ADD</button>
-                    </div>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="{{ route('logincustomer') }}" class="btn btn-primary">Login</a>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var btnPesan = document.getElementById('btn-pesan');
+        if (btnPesan) {
+            btnPesan.addEventListener('click', function() {
+                $('#loginModal').modal('show');
+            });
+        }
+    });
+</script>

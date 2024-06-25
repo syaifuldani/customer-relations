@@ -32,7 +32,7 @@
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100"
-                    src="https://www.jelajahsumatra.com/wp-content/uploads/2022/09/mie-gacoan-medan.jpg"
+                    src="https://www.minimeinsights.com/wp-content/uploads/2023/03/mie-gacoan-small-1000x562.jpg"
                     alt="Third slide">
             </div>
         </div>
@@ -50,30 +50,27 @@
     <div class="container">
         <!-- Konten -->
         <div id="home-content" class="home-content">
-            <!-- MIE GACOAN -->
-            <div class="gacoan" id="gacoanContent" style="display: block;">
-                @include('customers.gacoan')
-            </div>
-
-            <!-- MIE HOMPIMPA -->
-            <div class="hompimpa" id="hompimpaContent" style="display: none;">
-                @include('customers.hompimpa')
-            </div>
-
-            <!-- DIMSUM -->
-            <div class="dimsum" id="dimsumContent" style="display: none;">
-                @include('customers.dimsum')
-            </div>
-
-            <!-- MINUMAN -->
-            <div class="minuman" id="minumanContent" style="display: none;">
-                @include('customers.minuman')
-            </div>
+            @if ($category == 'mie-gacoan' || !$category)
+                <div class="gacoan" id="gacoanContent" style="display: block;">
+                    @include('customers.gacoan', ['barangs' => $barangs])
+                </div>
+            @elseif ($category == 'mie-hompimpa')
+                <div class="hompimpa" id="hompimpaContent" style="display: block;">
+                    @include('customers.hompimpa', ['barangs' => $barangs])
+                </div>
+            @elseif ($category == 'dimsum')
+                <div class="dimsum" id="dimsumContent" style="display: block;">
+                    @include('customers.dimsum', ['barangs' => $barangs])
+                </div>
+            @elseif ($category == 'minuman')
+                <div class="minuman" id="minumanContent" style="display: block;">
+                    @include('customers.minuman', ['barangs' => $barangs])
+                </div>
+            @endif
         </div>
 
         <div class="media">
-            <img class="align-self-start mr-3" src="https://ayawanita.com/wp-content/uploads/2023/03/image-36.png"
-                alt="Generic placeholder image">
+            <img class="align-self-start mr-3" src="../dist/img/gacoan.jpg" alt="Gacoan">
             <div class="media-body">
                 <h5 class="mt-0"><b>MIE GACOAN</b></h5>
                 <p>Mie Gacoan dikenal dengan cita rasa yang khas dan bumbu yang melimpah. Sebelumnya dikenal dengan nama
@@ -92,14 +89,11 @@
                     kuat,
                     cocok bagi para pencinta makanan pedas yang mencari tantangan rasa.</p>
             </div>
-            <img class="align-self-end ml-3" src="https://www.vmenu.id/storage/menu/167074536263958d1290938.jpg"
-                alt="Generic placeholder image">
+            <img class="align-self-end ml-3" src="../dist/img/hompimpa.jpg" alt="Generic placeholder image">
         </div>
 
         <div class="media">
-            <img class="align-self-start mr-3"
-                src="https://th.bing.com/th/id/OIP.TwEX79CJMgZPiUkTgQfJeAAAAA?rs=1&pid=ImgDetMain"
-                alt="Generic placeholder image">
+            <img class="align-self-start mr-3" src="../dist/img/dimsum.jpeg" alt="Generic placeholder image">
             <div class="media-body">
                 <h5 class="mt-0"><b>DIMSUM</b></h5>
                 <p>Dimsum merupakan hidangan pendamping yang populer di sini. Dikenal dengan cita rasa otentiknya,

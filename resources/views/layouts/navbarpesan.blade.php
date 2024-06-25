@@ -19,14 +19,10 @@
                     Kategori
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#" onclick="showCategory('gacoan', 'Mie Gacoan', event)">Mie
-                        Gacoan</a>
-                    <a class="dropdown-item" href="#"
-                        onclick="showCategory('hompimpa', 'Mie Hompimpa', event)">Mie
-                        Hompimpa</a>
-                    <a class="dropdown-item" href="#" onclick="showCategory('dimsum', 'Dimsum', event)">Dimsum</a>
-                    <a class="dropdown-item" href="#"
-                        onclick="showCategory('minuman', 'Minuman', event)">Minuman</a>
+                    <a class="dropdown-item" href="{{ url('/home/?kategori_barang=mie-gacoan') }}">Mie Gacoan</a>
+                    <a class="dropdown-item" href="{{ url('/home/?kategori_barang=mie-hompimpa') }}">Mie Hompimpa</a>
+                    <a class="dropdown-item" href="{{ url('/home/?kategori_barang=dimsum') }}">Dimsum</a>
+                    <a class="dropdown-item" href="{{ url('/home/?kategori_barang=minuman') }}">Minuman</a>
                 </div>
             </li>
             <li class="nav-item">
