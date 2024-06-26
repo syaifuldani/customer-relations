@@ -16,25 +16,23 @@
     <div class="container">
         <!-- Konten -->
         <div id="home-content" class="home-content">
-            <!-- MIE GACOAN -->
-            <div class="gacoan" id="gacoanContent" style="display: block;">
-                @include('customers.gacoan')
-            </div>
-
-            <!-- MIE HOMPIMPA -->
-            <div class="hompimpa" id="hompimpaContent" style="display: none;">
-                @include('customers.hompimpa')
-            </div>
-
-            <!-- DIMSUM -->
-            <div class="dimsum" id="dimsumContent" style="display: none;">
-                @include('customers.dimsum')
-            </div>
-
-            <!-- MINUMAN -->
-            <div class="minuman" id="minumanContent" style="display: none;">
-                @include('customers.minuman')
-            </div>
+            @if ($category == 'mie-gacoan' || !$category)
+                <div class="gacoan" id="gacoanContent" style="display: block;">
+                    @include('customers.gacoan', ['barangs' => $barangs])
+                </div>
+            @elseif ($category == 'mie-hompimpa')
+                <div class="hompimpa" id="hompimpaContent" style="display: block;">
+                    @include('customers.hompimpa', ['barangs' => $barangs])
+                </div>
+            @elseif ($category == 'dimsum')
+                <div class="dimsum" id="dimsumContent" style="display: block;">
+                    @include('customers.dimsum', ['barangs' => $barangs])
+                </div>
+            @elseif ($category == 'minuman')
+                <div class="minuman" id="minumanContent" style="display: block;">
+                    @include('customers.minuman', ['barangs' => $barangs])
+                </div>
+            @endif
         </div>
 
         <div class="cart-overlay" id="cartOverlay">

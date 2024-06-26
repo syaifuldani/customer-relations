@@ -8,7 +8,7 @@ class TambahPesananController extends Controller
 {
     public function indexTambahPesanan()
     {
-        return view('customers.tambah_pesanan', [
+        return view('customer.tambah_pesanan', [
             'title' => 'Tambah Pesanan'
         ]);
     }
