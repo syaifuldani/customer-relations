@@ -1,15 +1,7 @@
-function showCategory(category) {
-    document.querySelectorAll('.home-content > div').forEach(function (content) {
-        content.style.display = 'none';
-    });
-
-    document.querySelector('.' + category).style.display = 'block';
-}
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const cartOverlay = document.getElementById('cartOverlay');
     const closeCart = document.getElementById('closeCart');
+    const orderCart = document.getElementById('orderCart');
     const cartItems = document.getElementById('cartItems');
     const cartTotal = document.getElementById('cartTotal');
     const cartIcon = document.querySelector('.shopping');
@@ -92,6 +84,34 @@ document.addEventListener('DOMContentLoaded', function () {
         cartOverlay.style.right = '-100%';
         homeContent.classList.remove('with-cart-overlay'); // Hapus kelas
     });
+
+    orderCart.addEventListener('click', function () {
+        saveCart();
+    });
+
+    function saveCart() {
+        fetch('/cart/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ items: cart })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            alert('Pesanan berhasil disimpan');
+            cart = [];
+            updateCart();
+            cartOverlay.style.right = '-100%';
+            homeContent.classList.remove('with-cart-overlay');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Gagal menyimpan pesanan');
+        });
+    }
 
     // Kategori dan pencarian
     document.getElementById('searchInput').addEventListener('input', function () {

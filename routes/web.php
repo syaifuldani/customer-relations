@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginControllerCustomer;
 use App\Http\Controllers\RegisterStaffController;
 use App\Http\Controllers\TambahPesananController;
 use App\Http\Controllers\RegisterControllerCustomer;
+use App\Http\Controllers\CartController;
 
 Route::get('/', [HomeLandingController::class, 'index'])->name('home_landing');
 
@@ -34,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('tambah_pesanan', [TambahPesananController::class, 'indexTambahPesanan'])->name('pesan');
+Route::post('/cart/save', [CartController::class, 'saveCart'])->name('cart.save');
 
 
 
