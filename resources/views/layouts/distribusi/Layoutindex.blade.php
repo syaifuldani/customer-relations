@@ -50,7 +50,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url()->current() }}" class="nav-link">Home</a>
+                    <a href="{{ route('dashboardDistribusi') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -97,7 +97,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="{{ route('dashboard') }}" class="brand-link">
+        <a href="{{ route('dashboardDistribusi') }}" class="brand-link">
             <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                 style="opacity: .8">
             <span class="brand-text font-weight-light">CS - Relations</span>
@@ -137,7 +137,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('dashboard') }}" class="nav-link" id="berandaLink">
+                        <a href="{{ route('dashboardDistribusi') }}" class="nav-link" id="berandaLink">
                             <i class="nav-icon fas fa-tree"></i>
                             <p>Beranda</p>
                         </a>
@@ -232,8 +232,8 @@
     <!-- AdminLTE for demo purposes -->
     {{--
     <script src="../dist/js/demo.js"></script> --}}
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="../dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE dashboardPenjualan demo (This is only for demo purposes) -->
+    <script src="../dist/js/pages/dashboardPenjualan.js"></script>
     {{-- Table --}}
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

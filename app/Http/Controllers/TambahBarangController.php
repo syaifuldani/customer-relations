@@ -39,4 +39,13 @@ class TambahBarangController extends Controller
 
         return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Disimpan!']);
     }
+
+    public function edit(string $id)
+    {
+        //get product by ID
+        $product = Barangs::findOrFail($id);
+
+        //render view with product
+        return view('products.edit', compact('product'));
+    }
 }

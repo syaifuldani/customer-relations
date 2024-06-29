@@ -50,7 +50,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url()->current() }}" class="nav-link">Home</a>
+                    <a href="{{ route('dashboardPenjualan') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -97,7 +97,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="{{ route('dashboard') }}" class="brand-link">
+        <a href="{{ route('dashboardPenjualan') }}" class="brand-link">
             <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                 style="opacity: .8">
             <span class="brand-text font-weight-light">CS - Relations</span>
@@ -137,7 +137,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('dashboard') }}" class="nav-link" id="berandaLink">Beranda</a>
+                        <a href="{{ route('dashboardPenjualan') }}" class="nav-link" id="berandaLink">Beranda</a>
                     </li>
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
@@ -157,6 +157,12 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="nav-link" id="berandaLink">
+                            <i class="nav-icon fas fa-door-open"></i>
+                            <p>Logout</p>
+                        </a>
                     </li>
                 </ul>
             </nav>
