@@ -9,13 +9,10 @@ class HomeLandingController extends Controller
 {
     public function index(Request $request)
     {
-        $category = $request->query('kategori_barang', 'mie-gacoan'); // untuk Menyematkan nilai default dari pencarian pertama
-
-        // dd($category);
-
-        $products = Barangs::when($category, function ($query, $category) {
-            return $query->where('kategori_barang', $category);
-        })->get();
+        $category = $request->query('kategori_barang', 'mie-gacoan'); // Mendapatkan nilai kategori dari request, dengan nilai default 'mie-gacoan' jika tidak ada
+        $products = Barangs::where('kategori_barang', $category)
+            ->where('stok_barang', '>', 0)
+            ->get();
 
         return view('index', [
             'title' => 'Home',

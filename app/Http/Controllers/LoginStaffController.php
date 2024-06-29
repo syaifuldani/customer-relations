@@ -32,11 +32,11 @@ class LoginStaffController extends Controller
                 // Jika peran adalah customer, dapatkan data pengguna beserta relasi customer
                 $userData = User::with('staff')->find($user->id);
                 session(['userData' => $userData]);
-                return redirect()->intended(route('dashboard'));
+                return redirect()->intended(route('dashboardDistribusi'));
             } elseif ($user->role === 'staf-penjualan') {
                 $userData = User::with('staff')->find($user->id);
                 session(['userData' => $userData]);
-                return redirect()->intended(route('penjualan'));
+                return redirect()->intended(route('dashboardPenjualan'));
             } else {
                 // Jika peran bukan customer, logout dan kembalikan pesan kesalahan
                 Auth::logout();
