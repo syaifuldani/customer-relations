@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('riwayat_transaksi', function (Blueprint $table) {
             $table->id('id_riwayat');
             $table->foreignId('customer_id')->references('id_customer')->on('customers')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('staff_id')->references('id_staff')->on('staff')->onUpdate('cascade')->onDelete('cascade');
             $table->string('barang');
             $table->float('total_harga');
+            $table->enum('metode_pembayaran',['cash','qr']);
             $table->timestamps();
         });
     }
