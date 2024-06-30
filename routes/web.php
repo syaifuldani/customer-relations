@@ -12,6 +12,10 @@ use App\Http\Controllers\RegisterStaffController;
 use App\Http\Controllers\TambahPesananController;
 use App\Http\Controllers\RegisterControllerCustomer;
 use App\Http\Controllers\StaffPenjualanController;
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\KeranjangsController;
+use App\Http\Controllers\RiwayatTransaksiController;
 
 Route::get('/', [HomeLandingController::class, 'index'])->name('home_landing');
 
