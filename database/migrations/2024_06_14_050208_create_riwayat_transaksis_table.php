@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->references('id_customer')->on('customers')->onUpdate('cascade')->onDelete('cascade');
             $table->string('barang');
             $table->float('total_harga');
+            $table->enum('metode_pembayaran',['cash','qr']);
             $table->timestamps();
         });
     }

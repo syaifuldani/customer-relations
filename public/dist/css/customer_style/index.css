@@ -126,7 +126,7 @@ h1 {
     font-size: 0.8rem;
 }
 
-.cart-overlay {
+.cart-overlay{
     position: fixed;
     top: 0;
     right: -100%;
@@ -143,8 +143,10 @@ h1 {
     flex-direction: column;
     height: 100%;
 }
-.cart-content h5 {
+.cart-content .header {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 .cart-content ul {
     margin-top: 40px;
@@ -175,7 +177,7 @@ h1 {
     align-self: flex-end;
 }
 
-.cart-content .qty-btn {
+.cart-content .qty-btn, .remove-btn {
     background-color: #ff6600;
     color: white;
     border: none;
@@ -186,7 +188,7 @@ h1 {
     font-size: 1rem;
     font-weight: bold;
 }
-.cart-content .qty-btn:hover {
+.cart-content .qty-btn:hover, .remove-btn:hover {
     background-color: #e65c00; 
 }
 
@@ -237,6 +239,155 @@ h1 {
     font-size: 14px; /* Ukuran teks deskripsi */
 }
 
+/* Gaya dasar untuk overlay Qr */
+.qr-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Transparansi latar belakang */
+    z-index: 1000;
+    display: none; /* Secara default tidak ditampilkan */
+}
+
+.qr-overlay .overlay-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 100%;
+    max-height: 100%;
+    overflow-y: auto; /* Jika konten lebih panjang dari layar, tambahkan scroll */
+    margin: auto; /* Posisi tengah secara horizontal dan vertikal */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Bayangan untuk efek ketinggian */
+}
+
+.qr-overlay .overlay-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.qr-overlay .overlay-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dc3545; /* Warna latar tombol */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Nota Overlay */
+
+.nota-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.nota-overlay .overlay-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    width: 100%;
+    max-height: 80%;
+    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+    display: flex;
+    flex-direction: column; /* Add this line */
+}
+
+.nota-content h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.nota-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.nota-content table th,
+.nota-content table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.nota-content table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.nota-content .btn {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nota-content .btn:hover {
+    background-color: #c82333;
+}
+
+/* Riwayat Overlay */
+.riwayat-overlay {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 800px;
+    height: auto;
+    max-height: 80%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.overlay-content h5 {
+    margin-top: 0;
+}
+
 @media (max-width: 768px) {
     .media {
         flex-direction: column; /* Tata letak kolom untuk perangkat mobile */
@@ -257,5 +408,22 @@ h1 {
 
     .media p {
         font-size: 12px; /* Ukuran teks deskripsi dikurangi pada perangkat mobile */
+    }
+    .qr-overlay .overlay-content {
+        max-width: 90%;
+        max-height: 90%;
+        padding: 10px;
+    }
+
+    .qr-overlay .overlay-content h4 {
+        font-size: 15px;
+    }
+
+    .qr-overlay .overlay-content img {
+        max-width: 100%;
+    }
+
+    .qr-overlay .overlay-content button {
+        font-size: 14px;
     }
 }

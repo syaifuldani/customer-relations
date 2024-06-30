@@ -15,7 +15,8 @@ class RiwayatTransaksi extends Model
         'customer_id',
         'staff_id',
         'barang',
-        'total_harga'
+        'total_harga',
+        'metode_pembayaran'
     ];
 
     public function customers()

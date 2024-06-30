@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Auth;
 
 class CustomersController extends Controller
 {
@@ -26,9 +28,24 @@ class CustomersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function getCustomerId()
     {
-        //
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
+        $customerId = Customers::where('login_id', $user->id)->value('id_customer');
+
+        if (!$customerId) {
+            return response()->json(['error' => 'Customer not found'], 404);
+        }
+
+        // Logging customer ID for debugging
+        Log::info('Customer ID retrieved:', ['id_customer' => $customerId]);
+
+        return response()->json(['id_customer' => $customerId]);
     }
 
     /**
