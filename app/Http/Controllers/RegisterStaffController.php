@@ -41,6 +41,6 @@ class RegisterStaffController extends Controller
             'alamat' => $request->alamat
         ]);
 
-        return redirect()->route('logincustomer')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('loginstaff')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 }
