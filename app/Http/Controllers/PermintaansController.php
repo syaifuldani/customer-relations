@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Keranjangs;
-use Illuminate\Http\Request;
+use App\Models\Staff;
 use App\Models\Barangs;
 use App\Models\Customers;
+use App\Models\Permintaans;
+use Illuminate\Http\Request;
 use App\Models\RiwayatTransaksi;
-use App\Models\Staff;
-use Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class KeranjangsController extends Controller
+class PermintaansController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $user = Customers::all();
+        return view('penjualan.konfirmasi-pembelian', [
+            'title' => 'Permintaans',
+        ]);
     }
 
     /**
@@ -33,34 +38,35 @@ class KeranjangsController extends Controller
      */
     public function store(Request $request)
     {
-        \Log::info('Store request received', $request->all());
+        // Validate the request data
+        $request->validate([
+            'nama_barang' => 'required',
+            'kuantitas' => 'required',
+            'alamat' => 'required',
+            'jenis_pembayaran' => 'required',
+        ]);
 
-        $user = Auth::user();
-        $customer = $user->customer;
+        $customer_id = Auth::id();
 
-        if ($customer) {
-            foreach ($request->items as $item) {
-                $barang = Barangs::where('nama_barang', $item['name'])->first();
+        // Debug: Check customer ID and validated data
 
-                if ($barang) {
-                    if ($item['qty'] > 0) {
-                        Keranjangs::updateOrCreate(
-                            ['customer_id' => $customer->id_customer, 'barang_id' => $barang->id_barang],
-                            ['kuantitas' => $item['qty']]
-                        );
-                    } else {
-                        // Jika kuantitas 0, hapus dari keranjang
-                        Keranjangs::where('customer_id', $customer->id_customer)
-                            ->where('barang_id', $barang->id_barang)
-                            ->delete();
-                    }
-                }
-            }
-            return response()->json(['message' => 'Keranjang berhasil disimpan']);
-        } else {
-            return response()->json(['message' => 'Customer tidak ditemukan'], 404);
-        }
+        // dd($request);
+
+        // Create the permintaan record
+        $permintaan = Permintaans::create([
+            'customer_id' => Auth::id(),
+            'nama_barang' => $request->input('nama_barang'),
+            'kuantitas' => $request->input('kuantitas'),
+            'alamat' => $request->input('alamat'),
+            'jenis_pembayaran' => $request->input('jenis_pembayaran'),
+            'harga_barang' => $request->input('harga_barang', null),
+        ]);
+
+        // Redirect with success message
+        return redirect()->route('home')->with(['success' => 'Data Berhasil Disimpan!']);
     }
+
+
 
     public function saveOrder(Request $request)
     {
@@ -76,7 +82,7 @@ class KeranjangsController extends Controller
         $customer = $user->customer;
 
         if ($customer) {
-            $keranjangItems = Keranjangs::where('customer_id', $customer->id_customer)
+            $keranjangItems = Permintaans::where('customer_id', $customer->id_customer)
                 ->with('barang')
                 ->get();
 
@@ -89,7 +95,7 @@ class KeranjangsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Keranjangs $keranjangs)
+    public function edit(Permintaans $keranjangs)
     {
         //
     }
@@ -97,24 +103,24 @@ class KeranjangsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Keranjangs $keranjangs)
+    public function update(Request $request, Permintaans $keranjangs)
     {
         $user = Auth::user();
         $customer = $user->customer;
-    
+
         if ($customer) {
             foreach ($request->items as $item) {
                 $barang = Barangs::where('nama_barang', $item['name'])->first();
-    
+
                 if ($barang) {
                     if ($item['qty'] > 0) {
-                        Keranjangs::updateOrCreate(
+                        Permintaans::updateOrCreate(
                             ['customer_id' => $customer->id_customer, 'barang_id' => $barang->id_barang],
                             ['kuantitas' => $item['qty']]
                         );
                     } else {
                         // Jika kuantitas 0, hapus dari keranjang
-                        Keranjangs::where('customer_id', $customer->id_customer)
+                        Permintaans::where('customer_id', $customer->id_customer)
                             ->where('barang_id', $barang->id_barang)
                             ->delete();
                     }
@@ -133,15 +139,15 @@ class KeranjangsController extends Controller
     {
         $user = Auth::user();
         $customer = $user->customer;
-    
+
         if ($customer) {
             $barang = Barangs::where('nama_barang', $request->input('name'))->first();
-    
+
             if ($barang) {
-                Keranjangs::where('customer_id', $customer->id_customer)
+                Permintaans::where('customer_id', $customer->id_customer)
                     ->where('barang_id', $barang->id_barang)
                     ->delete();
-    
+
                 return response()->json(['message' => 'Item berhasil dihapus dari keranjang']);
             } else {
                 return response()->json(['message' => 'Barang tidak ditemukan'], 404);
@@ -149,5 +155,5 @@ class KeranjangsController extends Controller
         } else {
             return response()->json(['message' => 'Customer tidak ditemukan'], 404);
         }
-    }    
+    }
 }

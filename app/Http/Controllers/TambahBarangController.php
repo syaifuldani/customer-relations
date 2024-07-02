@@ -37,7 +37,7 @@ class TambahBarangController extends Controller
             'stok_barang' => $request->stok_barang
         ]);
 
-        return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('dashboardDistribusi')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     public function edit(string $id)

@@ -151,12 +151,32 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{ route('penjualan.permintaan') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Order Terjual</p>
+                                    <p>Konfirmasi Permintaan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('penjualan.permintaan') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Penjualan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('penjualan.permintaan') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Faktur Penjualan</p>
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Laporan Penjualan
+                            </p>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link" id="berandaLink">

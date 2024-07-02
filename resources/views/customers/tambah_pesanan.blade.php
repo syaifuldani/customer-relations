@@ -51,11 +51,11 @@
                         <p>Pilih Metode Pembayaran:</p>
                         <div>
                             <label>
-                                <input type="radio" name="metode_pembayaran" value="Tunai" required>
+                                <input type="radio" name="metode_pembayaran" value="tunai" required>
                                 Tunai
                             </label>
                             <label>
-                                <input type="radio" name="metode_pembayaran" value="QR Code" id="qrPayment" required>
+                                <input type="radio" name="metode_pembayaran" value="qrcode" id="qrPayment" required>
                                 QR Code
                             </label>
                         </div>

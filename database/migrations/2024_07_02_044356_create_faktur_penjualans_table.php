@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('keranjang', function (Blueprint $table) {
-            $table->id('id_keranjang');
+        Schema::create('faktur_penjualan', function (Blueprint $table) {
+            $table->id('id_faktur_penjualan');
             $table->foreignId('customer_id')->references('id_customer')->on('customers')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('barang_id')->references('id_barang')->on('barang')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('kuantitas');
+            $table->foreignId('pesanan_id')->references('id_pesanan')->on('permintaan')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('nama_customer');
+            $table->enum('status_order', ['Pending', 'Terkirim'])->default('Pending');
+            $table->date('tanggal_faktur');
+            $table->text('alamat_pengiriman');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('keranjang');
+        Schema::dropIfExists('faktur_penjualans');
     }
 };

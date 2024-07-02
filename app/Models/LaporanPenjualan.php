@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RiwayatTransaksi extends Model
+class LaporanPenjualan extends Model
 {
     use HasFactory;
-    protected $table = 'riwayat_transaksi';
-    protected $primaryKey = 'id_riwayat';
+    protected $table = 'laporan_penjualan';
+    protected $primaryKey = 'id_lap_penjualan';
 
     protected $fillable = [
         'customer_id',
@@ -19,9 +19,9 @@ class RiwayatTransaksi extends Model
         'metode_pembayaran'
     ];
 
-    public function customers()
+    public function customer()
     {
-        return $this->belongsTo(Customers::class, 'riwayat_id');
+        return $this->belongsTo(Customers::class, 'customer_id');
     }
 
     public function staff()

@@ -23,13 +23,13 @@ class Customers extends Model
         return $this->belongsTo(User::class, 'login_id');
     }
 
-    public function keranjang()
+    public function permintaan()
     {
-        return $this->hasOne(Keranjangs::class, 'keranjang_id');
+        return $this->hasOne(Permintaans::class, 'customer_id');
     }
 
-    public function riwayat_transaksi()
+    public function laporan_penjualan()
     {
-        return $this->hasOne(RiwayatTransaksi::class, 'riwayat_id');
+        return $this->hasOne(LaporanPenjualan::class, 'id_lap_penjualan');
     }
 }
