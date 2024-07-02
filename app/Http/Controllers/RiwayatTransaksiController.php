@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RiwayatTransaksi;
-use App\Models\Keranjangs;
-use Illuminate\Http\Request;
 use App\Models\Customers;
-use Auth;
+use App\Models\Keranjangs;
+use App\Models\Permintaans;
+use Illuminate\Http\Request;
+use App\Models\LaporanPenjualan;
+use App\Models\RiwayatTransaksi;
+use Illuminate\Support\Facades\Auth;
 
 class RiwayatTransaksiController extends Controller
 {
@@ -31,10 +33,10 @@ class RiwayatTransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        \Log::info('Request received at: ' . now());
-        \Log::info('Request Data: ', $request->all());
+        // \Log::info('Request received at: ' . now());
+        // \Log::info('Request Data: ', $request->all());
         $data = $request->all();
-        \Log::info('Data yang diterima:', $data);
+        // \Log::info('Data yang diterima:', $data);
 
         try {
             // Validasi request
@@ -49,8 +51,8 @@ class RiwayatTransaksiController extends Controller
             // Mengambil customer_id dari placeOrder
             $customer_id = $request->customer_id;
 
-            // Simpan riwayat transaksi ke database
-            $riwayatTransaksi = RiwayatTransaksi::create([
+            // Simpan riwayat transaksi idateanatean database
+            $riwayatTransaksi = LaporanPenjualan::create([
                 'customer_id' => $customer_id,
                 'barang' => json_encode($request->barang),
                 'total_harga' => $request->total_harga,
@@ -58,39 +60,46 @@ class RiwayatTransaksiController extends Controller
             ]);
 
             // Hapus items dari keranjang setelah berhasil disimpan ke riwayat transaksi
-            $itemsInCart = Keranjangs::where('customer_id', $customer_id)->get();
+            $itemsInCart = Permintaans::where('customer_id', $customer_id)->get();
             foreach ($itemsInCart as $item) {
                 $item->delete();
             }
 
             return response()->json(['message' => 'Order placed successfully!', 'data' => $riwayatTransaksi], 201);
         } catch (\Exception $e) {
-            \Log::error($e);
+            // \Log::error($e);
             return response()->json(['error' => 'Failed to place order.'], 500);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(RiwayatTransaksi $riwayatTransaksi)
+    public function show()
     {
         try {
-            $riwayatTransaksis = RiwayatTransaksi::all();
-            return response()->json($riwayatTransaksis);
+            // Get the logged-in customer's ID
+            $customerId = Auth::id();
+
+            // Fetch transactions only for the logged-in customer
+            $riwayatTransaksi = LaporanPenjualan::where('customer_id', $customerId)->get();
+
+            // Log the transactions for debugging
+            // \Log::info('Transactions fetched for customer ID ' . $customerId . ': ' . $riwayatTransaksi->toJson());
+
+            return response()->json($riwayatTransaksi);
         } catch (\Exception $e) {
-            \Log::error($e);
+            // \Log::error($e);
             return response()->json(['error' => 'Failed to fetch riwayat transaksi.'], 500);
         }
     }
 
+
+
     public function showNota($id)
     {
         try {
-            $riwayatTransaksi = RiwayatTransaksi::findOrFail($id);
+            $riwayatTransaksi = LaporanPenjualan::findOrFail($id);
             return response()->json($riwayatTransaksi);
         } catch (\Exception $e) {
-            \Log::error($e);
+            // \Log::error($e);
             return response()->json(['error' => 'Riwayat transaksi not found.'], 404);
         }
     }
@@ -98,7 +107,7 @@ class RiwayatTransaksiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RiwayatTransaksi $riwayatTransaksi)
+    public function edit(LaporanPenjualan $riwayatTransaksi)
     {
         //
     }
@@ -106,7 +115,7 @@ class RiwayatTransaksiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RiwayatTransaksi $riwayatTransaksi)
+    public function update(Request $request, LaporanPenjualan $riwayatTransaksi)
     {
         //
     }
@@ -114,7 +123,7 @@ class RiwayatTransaksiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RiwayatTransaksi $riwayatTransaksi)
+    public function destroy(LaporanPenjualan $riwayatTransaksi)
     {
         //
     }

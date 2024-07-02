@@ -27,6 +27,6 @@ class Barangs extends Model
 
     public function keranjang()
     {
-        return $this->hasOne(Keranjangs::class, 'barang_id');
+        return $this->hasOne(Permintaans::class, 'barang_id');
     }
 }

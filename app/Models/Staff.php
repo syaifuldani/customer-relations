@@ -31,6 +31,6 @@ class Staff extends Model
 
     public function riwayat_transaksi()
     {
-        return $this->hasOne(RiwayatTransaksi::class, 'riwayat_id');
+        return $this->hasOne(LaporanPenjualan::class, 'riwayat_id');
     }
 }

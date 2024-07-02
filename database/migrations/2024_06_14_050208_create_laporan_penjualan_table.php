@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('riwayat_transaksi', function (Blueprint $table) {
-            $table->id('id_riwayat');
+        Schema::create('laporan_penjualan', function (Blueprint $table) {
+            $table->id('id_lap_penjualan');
             $table->foreignId('customer_id')->references('id_customer')->on('customers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('staff_id')->references('id_staff')->on('staff')->onUpdate('cascade')->onDelete('cascade');
             $table->string('barang');
             $table->float('total_harga');
-            $table->enum('metode_pembayaran',['cash','qr']);
+            $table->enum('metode_pembayaran', ['Tunai', 'Qr Code']);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('riwayat_transaksi');
+        Schema::dropIfExists('laporan_penjualan');
     }
 };

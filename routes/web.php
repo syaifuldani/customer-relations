@@ -9,12 +9,12 @@ use App\Http\Controllers\HomeControllerCustomer;
 use App\Http\Controllers\TambahBarangController;
 use App\Http\Controllers\LoginControllerCustomer;
 use App\Http\Controllers\RegisterStaffController;
-use App\Http\Controllers\TambahPesananController;
+// use App\Http\Controllers\TambahPesananController;
 use App\Http\Controllers\RegisterControllerCustomer;
 use App\Http\Controllers\StaffPenjualanController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\KeranjangsController;
+use App\Http\Controllers\PermintaansController;
 use App\Http\Controllers\RiwayatTransaksiController;
 
 Route::get('/', [HomeLandingController::class, 'index'])->name('home_landing');
@@ -35,15 +35,15 @@ Route::prefix('login')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeControllerCustomer::class, 'index'])->name('home');
-    Route::get('/get_customer_id', [CustomersController::class, 'getCustomerId']);
-    Route::get('/show_staff/store', [StaffController::class, 'store']);
-    Route::post('/riwayat_transaksi/store', [RiwayatTransaksiController::class, 'store']);
-    Route::get('/keranjangs/showCart', [KeranjangsController::class, 'showCart']);
-    Route::post('/keranjangs/store', [KeranjangsController::class, 'store']);
-    Route::post('/keranjangs/update', [KeranjangsController::class, 'update']);
-    Route::delete('/keranjangs/destroy', [KeranjangsController::class, 'destroy']);
-    Route::get('/riwayat_transaksi/show', [RiwayatTransaksiController::class, 'show']);
-    Route::get('/riwayat_transaksi/{id}', [RiwayatTransaksiController::class, 'showNota']);
+    // Route::get('/get_customer_id', [CustomersController::class, 'getCustomerId']);
+    // Route::get('/show_staff/store', [StaffController::class, 'store']);
+    // Route::post('/riwayat_transaksi/store', [RiwayatTransaksiController::class, 'store']);
+    // Route::get('/permintaan', [PermintaansController::class, 'index'])->name('permintaan');
+    Route::post('/permintaan/store', [PermintaansController::class, 'store'])->name('permintaan.store');
+    // Route::post('/keranjangs/update', [PermintaansController::class, 'update']);
+    // Route::delete('/keranjangs/destroy', [PermintaansController::class, 'destroy']);
+    // Route::get('/riwayat_transaksi/show', [RiwayatTransaksiController::class, 'show']);
+    // Route::get('/riwayat_transaksi/{id}', [RiwayatTransaksiController::class, 'showNota']);
 });
 
 
@@ -61,7 +61,6 @@ Route::prefix('daftarstaff')->group(function () {
     Route::post('/daftar', [RegisterStaffController::class, 'store'])->name('register.daftar');
 });
 
-
 Route::prefix('staf-distribusi')->group(function () {
     Route::get('/', [StaffDistribusiController::class, 'index'])->name('dashboardDistribusi');
     Route::get('tambah_barang', [TambahBarangController::class, 'index'])->name('tambah_barang');
@@ -71,9 +70,9 @@ Route::prefix('staf-distribusi')->group(function () {
     Route::delete('products/{id}', [StaffDistribusiController::class, 'destroy'])->name('products.delete');
 });
 
-
 Route::prefix('staf-penjualan')->group(function () {
     Route::get('/', [StaffPenjualanController::class, 'index'])->name('dashboardPenjualan');
+    Route::get('permintaan', [PermintaansController::class, 'index'])->name('penjualan.permintaan');
 });
 
 

@@ -26,7 +26,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pesanan Saya</a>
+                <button type="button" class="btn btn-primarys" data-toggle="modal"
+                    data-target="#modal_edit">Pesan</button>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -38,7 +39,7 @@
             </li>
             <li class="nav-item mr-2">
                 <div class="tagnama" id="tagnama">
-                    <span>{{ $nama }}</span>
+                    <span>budi</span>
                 </div>
             </li>
 
@@ -48,6 +49,53 @@
         </ul>
     </div>
 </nav>
+
+<!-- Modal Edit Product -->
+<!-- Modal Edit Product -->
+<div class="modal fade" id="modal_edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('permintaan.store') }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Form Pesanan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" name="id" value="">
+                    <div class="mb-3">
+                        <label for="nama_barang" class="form-label">Nama Barang</label>
+                        <input type="text" id="nama_barang" class="form-control" name="nama_barang" value=""
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kuantitas" class="form-label">Kuantitas</label>
+                        <input type="text" id="kuantitas" class="form-control" name="kuantitas" value=""
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="alamat" class="form-label">Alamat</label>
+                        <input type="text" id="alamat" class="form-control" name="alamat" value=""
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jenis_pembayaran" class="form-label">Metode Pembayaran</label>
+                        <select id="jenis_pembayaran" class="form-control" name="jenis_pembayaran" required>
+                            <option value="Tunai">Tunai</option>
+                            <option value="QR">QR</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-primary">Pesan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 

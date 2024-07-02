@@ -1,4 +1,4 @@
-@extends('layouts.penjualan.Layoutindex');
+@extends('layouts.penjualan.Layoutindex')
 @section('content')
     {{-- ==================================CONTENT MAIN ========================================= --}}
     <!-- Content Header (Page header) -->
@@ -24,63 +24,28 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>150</h3>
-
-                            <p>New Orders</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                            <p>Bounce Rate</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
-
-                            <p>User Registrations</p>
+                            <h3>{{ $totalcustomers }}</h3>
+                            <p>Total Customer</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Unique Visitors</p>
+                            <h3>{{ $totalproduct }}</h3>
+                            <p>Total Penjualan</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -88,17 +53,64 @@
             <!-- Main row -->
             <div class="row">
                 <!-- Left col -->
-                <section class="col-lg-7 connectedSortable">
-                    <!-- Custom tabs (Charts with tabs)-->
-                    <h1>Apa gitu bang</h1>
-                    sasa
-                    <div class="card">
-                        {{-- CONTENT CARD --}}
+                <section class="col-12">
+                    <!-- Main row -->
+                    <div class="row">
+                        <div class="col-12 mt-2">
+                            <!-- /.card -->
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Id Transaksi</th>
+                                                <th>Id Customer</th>
+                                                <th>Nama Customer</th>
+                                                <th>Barang</th>
+                                                <th>Qty</th>
+                                                <th>Total Harga</th>
+                                                <th>Metode Pembayaran</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($products as $product)
+                                                @php
+                                                    $barang = json_decode($product->barang, true);
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ $product->id_riwayat }}</td>
+                                                    <td>{{ $product->customer_id }}</td>
+                                                    <td>{{ $product->customer->nama_customer ?? 'N/A' }}</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach ($barang as $item)
+                                                                <li>{{ $item['name'] }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach ($barang as $item)
+                                                                <li>{{ $item['qty'] }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+                                                    <td>{{ $product->total_harga }}</td>
+                                                    <td>{{ $product->metode_pembayaran }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
                     </div>
+                    <!-- /.row (main row) -->
                 </section>
-                <!-- right col -->
-            </div>
-            <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
